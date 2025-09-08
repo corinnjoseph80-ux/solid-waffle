@@ -1,0 +1,54 @@
+{
+  "name": "@actions/add-to-project",
+  "description": "Automatically adds issues and PRs to GitHub projects",
+  "version": "0.0.0",
+  "author": "GitHub and contributors",
+  "dependencies": {
+    "@actions/core": "^1.9.0",
+    "@actions/github": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=16.0.0 <17.0.0",
+    "npm": ">= 7.0.0"
+  },
+  "devDependencies": {
+    "@github/prettier-config": "^0.0.4",
+    "@types/jest": "^27.5.0",
+    "@types/node": "~16.11.59",
+    "@typescript-eslint/parser": "^5.37.0",
+    "@vercel/ncc": "^0.34.0",
+    "concurrently": "^7.4.0",
+    "eslint": "^8.23.1",
+    "eslint-plugin-github": "^4.3.7",
+    "eslint-plugin-jest": "^27.0.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^27.5.1",
+    "prettier": "2.7.1",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.8.3"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "license": "MIT",
+  "main": "lib/main.js",
+  "prettier": "@github/prettier-config",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/actions/add-to-project.git"
+  },
+  "scripts": {
+    "build": "npm run fix:format && npm run check && npm run build:compile && npm run build:package",
+    "build:compile": "tsc",
+    "build:package": "ncc build --source-map --license licenses.txt",
+    "check": "concurrently -n check: -c red,green,blue -g npm:check:*",
+    "check:build": "tsc --noEmit",
+    "check:format": "prettier --check .",
+    "check:lint": "eslint .",
+    "fix:format": "prettier --write .",
+    "test": "jest"
+  }
+}
